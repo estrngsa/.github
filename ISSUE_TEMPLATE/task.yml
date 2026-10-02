@@ -1,0 +1,71 @@
+name: Task
+description: A self-sufficient unit of work an agent or a human can pick up without hunting for context.
+title: "<type>: <short imperative summary>"
+projects: ["estrngsa/6"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The issue is the brief. If an agent needs to ask a question to start, the issue is not ready.
+        Use the Conventional Commits type in the title (feat, fix, refactor, chore, docs, test, ci).
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What outcome this delivers and why it matters. One or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Links to the plan section, ADR, OpenSpec change, parent issue or prior discussion. Facts only.
+    validations:
+      required: false
+  - type: textarea
+    id: files
+    attributes:
+      label: Files and symbols
+      description: Exact paths, modules or symbols in scope. Name what must NOT change.
+      placeholder: |
+        In scope:
+        - src/...
+        Must not change:
+        - ...
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable, testable statements. Each one should map to a check.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: How to verify
+      description: The gate command and any test that proves the criteria (automated, not a manual run).
+      placeholder: "Gate per AGENTS.md, plus: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and likely mistakes
+      description: Layer rules, security rules, dependencies not allowed, traps an implementer is likely to fall into.
+    validations:
+      required: false
+  - type: dropdown
+    id: size
+    attributes:
+      label: Change size
+      description: Structural or multi-file changes go through OpenSpec; small changes are a branch and a commit.
+      options:
+        - Small (branch + commit)
+        - Structural (OpenSpec change required)
+    validations:
+      required: true
