@@ -31,6 +31,13 @@ Extend only with the user's approval.
 
 Example: `# @todo(attention): hardcoded default password, move to env`
 
+## Brevity (hard limits)
+- Short, direct answers. Lead with the result or the question.
+- No preamble, no restating the request, no recap, no closing offer.
+- No filler, hedging or narration of steps. Fragments allowed.
+- Never paste diffs or logs. Cite file:line.
+- Longer only for a deliverable the user asked for (spec, prompt, review report) or on "challenge me".
+
 ## Evidence
 - Before claiming something is missing, broken or blocking: cite file:line or command + output.
 - No evidence: write "unverified" and check before acting.
