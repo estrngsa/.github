@@ -50,7 +50,7 @@ Tiers: `flash` mechanical; `pro` security, networking, spec judgement; `flash-lo
 
 ### Model routing: Claude/GPT quota first
 Applies to every call, silent or prompt mode.
-- Marker `~/.antigravity-jobs/.quota-exhausted` younger than 30 min (`find <marker> -mmin -30`): skip to the Gemini fallback.
+- Marker `~/.antigravity-jobs/.quota-exhausted` younger than 1 h (`find <marker> -mmin -60`): skip to the Gemini fallback.
 - Otherwise delegate on Claude/GPT with `--model`: `claude-sonnet-5-5-high` for mechanical/bulk, `claude-opus-5-5-high` for security, networking, spec judgement. No probe call: the delegation is the check.
 - Keep delegating on Claude/GPT until the quota is exhausted.
 - Exhausted = exit 10 or `AGY_SIGNAL` `QUOTA_EXHAUSTED` (exit 14, model unavailable, counts too). Then `touch` the marker.
