@@ -19,7 +19,7 @@ body:
     id: context
     attributes:
       label: Context
-      description: Links to the plan section, ADR, OpenSpec change, parent issue or prior discussion. Facts only.
+      description: Links to ADR, OpenSpec change, parent issue or prior discussion. Facts only.
     validations:
       required: false
   - type: textarea
@@ -69,3 +69,11 @@ body:
         - Structural (OpenSpec change required)
     validations:
       required: true
+  - type: checkboxes
+    id: ready
+    attributes:
+      label: Definition of Ready
+      description: Anything undecided goes back to planning, not to an agent.
+      options:
+        - label: No open questions
+          required: true
