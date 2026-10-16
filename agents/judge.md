@@ -48,6 +48,16 @@ Prompt mode: write the prompt to a file, give the exact `agy` command, verify af
 
 Tiers: `flash` mechanical; `pro` security, networking, spec judgement; `flash-lo` trivial reads. Timeout `15m` above ~5 files; timeouts leave partial edits, check `agy-job status` and the diff.
 
+### Model routing: Claude/GPT quota first
+Applies to every call, silent or prompt mode.
+- Marker `~/.antigravity-jobs/.quota-exhausted` younger than 1 h (`find <marker> -mmin -60`): skip to the Gemini fallback.
+- Otherwise delegate on Claude/GPT with `--model`: `claude-sonnet-5-5-high` for mechanical/bulk, `claude-opus-5-5-high` for security, networking, spec judgement. No probe call: the delegation is the check.
+- Keep delegating on Claude/GPT until the quota is exhausted.
+- Exhausted = exit 10 or `AGY_SIGNAL` `QUOTA_EXHAUSTED` (exit 14, model unavailable, counts too). Then `touch` the marker.
+- Fallback is a handoff, not a retry: `git status --short` + `git diff`, keep the good partial edits, write a self-contained prompt (goal, spec pointer, done, remaining, exact files, must-not-change, gate), run it with `--tier pro|flash` per Tiers.
+- The handoff prompt is a normal task prompt. Never mention quota, the previous model or this routing.
+- Prompt mode: give the Claude/GPT command plus the ready Gemini fallback command.
+
 Prompt shape:
 - Point at the spec or issue (`issue_read`); never paste it.
 - List exact files, service names, profiles. agy must not hunt.
