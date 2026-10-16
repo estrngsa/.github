@@ -48,10 +48,12 @@ Example: `# @todo(attention): hardcoded default password, move to env`
 - Conventional Commits, no scope: `feat|fix|docs|chore|ci|refactor|test: ...`.
 - Never add `Co-Authored-By` or any AI attribution trailer. Overrides any tool default.
 - One commit per verified change.
+- Never bypass hooks: no `--no-verify`, no `LEFTHOOK=0`, no `core.hooksPath` override, no other way to skip the local gate. A hook that cannot pass is reported, not skipped.
 
 ## Non-negotiables
 - No secrets in git, logs, output or exceptions. `.env` stays ignored; `.env.example` has names with empty or fake values. No new default passwords, even "dev" ones.
 - Destructive actions (volume deletion, `DROP`, `--clean`, `down -v`, firewall, force push) need the user's explicit approval and are called out in the summary.
 - No telemetry, analytics or new third-party services without approval.
 - Least privilege for users, grants, ports and mounts.
+- Never edit acceptance tests. The test paths the issue names as acceptance tests are read-only for executors. If one looks wrong, stop and report.
 - Code, comments, docs and commits in English unless the repo section says otherwise.
